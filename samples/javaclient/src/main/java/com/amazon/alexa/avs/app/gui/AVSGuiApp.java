@@ -6,8 +6,17 @@
  * KIND, either express or implied. See the License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.amazon.alexa.avs;
+package com.amazon.alexa.avs.app.gui;
 
+import com.amazon.alexa.avs.AVSAudioPlayerFactory;
+import com.amazon.alexa.avs.AVSController;
+import com.amazon.alexa.avs.AlertManagerFactory;
+import com.amazon.alexa.avs.DialogRequestIdAuthority;
+import com.amazon.alexa.avs.ExpectSpeechListener;
+import com.amazon.alexa.avs.PlaybackAction;
+import com.amazon.alexa.avs.RecordingRMSListener;
+import com.amazon.alexa.avs.RequestListener;
+import com.amazon.alexa.avs.Visualizer;
 import com.amazon.alexa.avs.auth.AccessTokenListener;
 import com.amazon.alexa.avs.auth.AuthSetup;
 import com.amazon.alexa.avs.auth.companionservice.RegCodeDisplayHandler;
@@ -18,6 +27,7 @@ import com.amazon.alexa.avs.http.AVSClientFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -57,7 +67,7 @@ public class AVSGuiApp extends JFrame implements ExpectSpeechListener, Recording
     private JButton actionButton;
     private JButton playPauseButton;
     private JTextField tokenTextField;
-    private JProgressBar visualizer;
+    private GuiProgressBar visualizer;
     private Thread autoEndpoint = null; // used to auto-endpoint while listening
     private final DeviceConfig deviceConfig;
     // minimum audio level threshold under which is considered silence
@@ -169,7 +179,7 @@ public class AVSGuiApp extends JFrame implements ExpectSpeechListener, Recording
     }
 
     private void addVisualizerField() {
-        visualizer = new JProgressBar(0, 100);
+        visualizer = new GuiProgressBar(0, 100);
         getContentPane().add(visualizer);
     }
 
