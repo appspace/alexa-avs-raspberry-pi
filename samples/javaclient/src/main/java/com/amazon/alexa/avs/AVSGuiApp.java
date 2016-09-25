@@ -40,10 +40,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 
 @SuppressWarnings("serial")
-public class AVSApp extends JFrame implements ExpectSpeechListener, RecordingRMSListener,
+public class AVSGuiApp extends JFrame implements ExpectSpeechListener, RecordingRMSListener,
         RegCodeDisplayHandler, AccessTokenListener {
 
-    private static final Logger log = LoggerFactory.getLogger(AVSApp.class);
+    private static final Logger log = LoggerFactory.getLogger(AVSGuiApp.class);
 
     private static final String APP_TITLE = "Alexa Voice Service";
     private static final String START_LABEL = "Start Listening";
@@ -69,21 +69,21 @@ public class AVSApp extends JFrame implements ExpectSpeechListener, RecordingRMS
 
     public static void main(String[] args) throws Exception {
         if (args.length == 1) {
-            new AVSApp(args[0]);
+            new AVSGuiApp(args[0]);
         } else {
-            new AVSApp();
+            new AVSGuiApp();
         }
     }
 
-    public AVSApp() throws Exception {
+    public AVSGuiApp() throws Exception {
         this(DeviceConfigUtils.readConfigFile());
     }
 
-    public AVSApp(String configName) throws Exception {
+    public AVSGuiApp(String configName) throws Exception {
         this(DeviceConfigUtils.readConfigFile(configName));
     }
 
-    private AVSApp(DeviceConfig config) throws Exception {
+    private AVSGuiApp(DeviceConfig config) throws Exception {
         deviceConfig = config;
         controller = new AVSController(this, new AVSAudioPlayerFactory(), new AlertManagerFactory(),
                 getAVSClientFactory(deviceConfig), DialogRequestIdAuthority.getInstance());
